@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="flex-container" *ngFor="let rows of ROWS_IN_COACH">
+        <div *ngFor="let sheet of rows">
+          <i
+            class="fas fa-chair"
+            style="font-size: 24px"
+            [class.text-primary]="sheet == 1"
+            [class.text-dark]="!sheet"
+          ></i>
+        </div>
+      </div>
+      <form [formGroup]="frm" (ngSubmit)="occupy_sheet()">
+        <div class="form-group">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Enter Number of Sheet"
+            formControlName="number_of_sheet"
+            [class.is-invalid]="
+              number_of_sheet.invalid && number_of_sheet.touched
+            "
+          />
+          <div *ngIf="number_of_sheet.invalid && number_of_sheet.touched">
+            <small class="text-danger" *ngIf="number_of_sheet.errors?.required"
+              >Number of Sheet field required</small
+            >
+            <small
+              class="text-danger"
+              *ngIf="number_of_sheet.errors?.min || number_of_sheet.errors?.max"
+              >Number of Sheet must be between 1-7
+            </small>
+          </div>
+        </div>
+
+        <button
+          [disabled]="frm.invalid"
+          class="btn btn-primary btn-block"
+          type="submit"
+        >
+          Book Sheet
+        </button>
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
