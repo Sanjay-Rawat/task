@@ -12,16 +12,16 @@ export class AppComponent implements OnInit {
   ROWS_IN_COACH: Array<any> = [];
   frm: FormGroup | any;
   constructor(private fb: FormBuilder) {
-    this.frm = this.fb.group({
+   
+  }
+  ngOnInit(): void {
+    this.ROWS_IN_COACH = this.init_row(this.NUMBER_OF_SHEET);
+     this.frm = this.fb.group({
       number_of_sheet: [
         '1',
         [Validators.min(1), Validators.max(7), Validators.required],
       ],
     });
-  }
-  ngOnInit(): void {
-    this.ROWS_IN_COACH = this.init_row(this.NUMBER_OF_SHEET);
-    // this.frm = this.fb.group(
   }
 
   /**
